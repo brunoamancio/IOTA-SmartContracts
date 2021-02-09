@@ -1,0 +1,4 @@
+[submodule "SmartContract/wasp"]
+	path = SmartContract/wasp
+	url = https://github.com/iotaledger/wasp.git
+	branch = develop

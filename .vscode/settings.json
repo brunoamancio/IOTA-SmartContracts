@@ -1,0 +1,30 @@
+{
+    "files.exclude": {
+    
+      "**/target": true,
+      "**/Cargo.lock": true,
+      
+      "**/pkg/*.js*" : true,
+      "**/pkg/*.ts" : true,
+
+      //"go.mod": true,
+      "**/go.sum": true,
+
+      "**/.git*" : true,
+            
+      "LICENSE" : true,
+      "*.md" : true,
+      
+      "SmartContract/wasp" : true,
+      "SmartContract/schemaGenerator*" : true,
+
+      "*.png" : true
+    },
+    "go.testFlags": [
+      "-v",
+      //"-buildmode=exe" // Uncomment this on windows. Is is needed due to an issue caused by gcc when compiling the unit tests
+    ],
+    "gopls": {
+      "experimentalWorkspaceModule" : true
+    }, 
+  }
