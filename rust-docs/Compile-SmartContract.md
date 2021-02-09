@@ -2,5 +2,5 @@
 
 With VSCode open, in a terminal (In the menu : Terminal > New Terminal), compile the smart contract with:
 ```
-wasm-pack build SmartContract
+wasm-pack build smartcontract/src-rust/
 ```

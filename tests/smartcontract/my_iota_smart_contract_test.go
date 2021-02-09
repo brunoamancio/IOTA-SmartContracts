@@ -3,10 +3,8 @@ package libtest
 import (
 	"testing"
 
-	"github.com/brunoamancio/IOTA-SmartContracts-Template-Base/tests/testutils"
-	"github.com/stretchr/testify/require"
-
 	"github.com/iotaledger/wasp/packages/solo"
+	"github.com/stretchr/testify/require"
 )
 
 //  -----------------------------------------------  //
@@ -16,7 +14,7 @@ import (
 func TestLib(t *testing.T) {
 	// Contract name - Defined in SmartContract/Cargo.toml > package > name
 	const contractName = "my_iota_sc"
-	contractWasmFilePath := testutils.MustGetContractWasmFilePath(t, contractName)
+	contractWasmFilePath := "<file path to contract.wasm>" // You can use if file is in SmartContract/pkg testutils.MustGetContractWasmFilePath(t, contractName)
 
 	// Name of the SC function to be requested - Defined in lib.rs > add_call > my_sc_request
 	functionName := "my_sc_request"
