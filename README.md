@@ -1,4 +1,4 @@
-## IOTA smart contracts - Bae Template used to create other templates
+## IOTA smart contracts - Base Template used to create other templates
 
 A simple template used to start developing your own smart contracts for ISCP (IOTA Smart Contract Protocol) in Rust and write unit tests in Go. In order to develop using the environment set up by this template, you need to have good understanding of the Rust and Go languages.
 
