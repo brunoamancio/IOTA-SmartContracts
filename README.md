@@ -7,7 +7,7 @@ This is a repository for myself but I welcome anyone interested in playing aroun
 ### Simple structure prepared to start with development right away
 This is how the templated file structure looks like:
 
-![View of the template on VSCode](VSCode-TemplateView.png)
+![View of the template on VSCode](general-docs/VSCode-TemplateView.png)
 
 ---
 
@@ -35,10 +35,10 @@ git clone --recurse-submodules <your_git_repository>
 ```
 - Open your git repository on VSCode
 - For Windows *only*, open file ".vscode/settings.json" and uncomment the setting "go.testFlags" entry "-buildmode=exe":
-![Go.testFlags for Windows](go-testflags.png)
+![Go.testFlags for Windows](general-docs/go-testflags.png)
 - Open file `go.mod` and change the go module's name from `module github.com/brunoamancio/IOTA-SmartContracts-Template-Base` to `module github.com/<your_username>/<your_project_name>`
 
-*Done!* Now you can write your smart contract in `smartcontract/src/`, [compile](rust-docs/Compile-SmartContract.md) it, [run and debug](UnitTest-and-debug-SmartContract.md) it in `tests/smartcontract/my_iota_smart_contract_test.go`!
+*Done!* Now you can write your smart contract in `smartcontract/src-<language>/`, [compile](general-docs/Compile-SmartContract.md) it, [run and debug](general-docs/UnitTest-and-debug-SmartContract.md) it in `tests/smartcontract/my_iota_smart_contract_test.go`!
 
 ---
 [MIT License](LICENSE)

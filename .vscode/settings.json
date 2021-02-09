@@ -16,8 +16,7 @@
       
       //"SmartContract/wasp" : true,
       "SmartContract/schemaGenerator*" : true,
-
-      "*.png" : true
+      "general-docs" : true
     },
     "go.testFlags": [
       "-v",
