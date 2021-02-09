@@ -14,8 +14,6 @@
       "LICENSE" : true,
       "*.md" : true,
       
-      //"SmartContract/wasp" : true,
-      "SmartContract/schemaGenerator*" : true,
       "general-docs" : true
     },
     "go.testFlags": [
