@@ -1,11 +1,10 @@
 {
     "files.exclude": {
     
-      "**/target": true,
       "**/Cargo.lock": true,
       
-      "**/pkg/*.js*" : true,
-      "**/pkg/*.ts" : true,
+      "**/target/*.js*" : true,
+      "**/target/*.ts" : true,
 
       //"go.mod": true,
       "**/go.sum": true,
@@ -15,7 +14,7 @@
       "LICENSE" : true,
       "*.md" : true,
       
-      "SmartContract/wasp" : true,
+      //"SmartContract/wasp" : true,
       "SmartContract/schemaGenerator*" : true,
 
       "*.png" : true
