@@ -24,7 +24,7 @@
       "-v",
       //"-buildmode=exe" // Uncomment this on windows. Is is needed due to an issue caused by gcc when compiling the unit tests
     ],
-    "gopls": {
-      "experimentalWorkspaceModule" : true
-    }, 
+    // "gopls": {
+    //   "experimentalWorkspaceModule" : true
+    // }, 
   }
