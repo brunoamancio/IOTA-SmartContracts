@@ -41,7 +41,7 @@ git submodule update --init --recursive -- smartcontract/rust
 ![Go.testFlags for Windows](general-docs/go-testflags.png)
 - Open file `go.mod` and change the go module's name from `module github.com/brunoamancio/IOTA-SmartContracts-Template-Base` to `module github.com/<your_username>/<your_project_name>`
 
-*Done!* Now you can write your smart contract in `smartcontract/src-<language>/`, [compile](general-docs/Compile-SmartContract.md) it, [run and debug](general-docs/UnitTest-and-debug-SmartContract.md) unit tests in `tests/smartcontract/my_iota_smart_contract_test.go`!
+*Done!* Now you can write your smart contract in `smartcontract/<language>`, [compile](general-docs/Compile-SmartContract.md) it, [run and debug](general-docs/UnitTest-and-debug-SmartContract.md) unit tests in `tests/smartcontract/my_iota_smart_contract_test.go`!
 
 ---
 [MIT License](LICENSE)
