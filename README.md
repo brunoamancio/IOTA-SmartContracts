@@ -11,8 +11,8 @@ This is how the templated file structure looks like:
 
 ---
 
-### Requirements for any development
-- [Go](https://golang.org/dl/)
+### Requirements for Go and Rust development
+- [Go](https://golang.org/dl/) - [Why Go?](general-docs/WhyGo.md)
 - Gcc (or equivalent for Windows [(TDM-GCC)](https://jmeubank.github.io/tdm-gcc/)) - [Why Gcc?](general-docs/WhyGo.md)
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
   - [Go Extension](https://marketplace.visualstudio.com/items?itemName=golang.Go)
