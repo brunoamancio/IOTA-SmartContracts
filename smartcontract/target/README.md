@@ -1,1 +1,0 @@
-This is where the compiled smart contracts (.wasm) are kept.

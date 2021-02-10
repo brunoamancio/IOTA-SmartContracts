@@ -3,18 +3,23 @@
     
       "**/Cargo.lock": true,
       
-      "**/target/*.js*" : true,
-      "**/target/*.ts" : true,
+      "**/LICENSE": true,
 
       //"go.mod": true,
       "**/go.sum": true,
 
       "**/.git*" : true,
             
-      "LICENSE" : true,
       "*.md" : true,
       
-      "general-docs" : true
+      "general-docs" : true,
+
+      "smartcontract/rust/target/" : true,
+      "smartcontract/rust/pkg/*.js" : true,
+      "smartcontract/rust/pkg/*.ts" : true,
+      "smartcontract/rust/pkg/package.json" : true,
+
+      "smartcontract/rust/wasp" : true
     },
     "go.testFlags": [
       "-v",
