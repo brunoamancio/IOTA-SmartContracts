@@ -32,7 +32,7 @@ This is how the templated file structure looks like:
 git clone <your_git_repository>
 cd <your_clones_directory>
 ```
-- Initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace <language> for rust or go. Example for development in Rust:
+- Initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace \<language> for rust or go. Example for development in Rust:
 ```
 git submodule update --init --recursive -- smartcontract/rust
 ```
