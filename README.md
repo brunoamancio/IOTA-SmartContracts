@@ -11,21 +11,18 @@ This is how the templated file structure looks like:
 
 ---
 
-### Requirements for development in Rust 
-- [Rust](https://www.rust-lang.org/tools/install)
-- [Wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
-- [Go](https://golang.org/dl/) - [Why Go?](general-docs/WhyGo.md)
-- Gcc (or equivalent for Windows [(TDM-GCC)](https://jmeubank.github.io/tdm-gcc/)) - [Why Gcc?](general-docs/WhyGo.md)
-- [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
-  - [Rust extension](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
-  - [Better TOML](https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml) *Optional nice to have 
-  - [Go Extension](https://marketplace.visualstudio.com/items?itemName=golang.Go)
-
-### Requirements for development in Go (only)
+### Requirements for any development
 - [Go](https://golang.org/dl/)
 - Gcc (or equivalent for Windows [(TDM-GCC)](https://jmeubank.github.io/tdm-gcc/)) - [Why Gcc?](general-docs/WhyGo.md)
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
   - [Go Extension](https://marketplace.visualstudio.com/items?itemName=golang.Go)
+
+### Extra requirements for development in Rust
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
+- [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
+  - [Rust extension](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
+  - [Better TOML](https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml) *Optional nice to have 
 
 ### Set code up!
 - Use this template repository to create your own.
