@@ -1,4 +1,4 @@
-[submodule "SmartContract/wasp"]
-	path = SmartContract/wasp
-	url = https://github.com/iotaledger/wasp.git
-	branch = develop
+[submodule "smartcontract/rust"]
+	path = smartcontract/rust
+	url = https://github.com/brunoamancio/IOTA-SmartContracts-HelloWorld-Rust.git
+	branch = main
