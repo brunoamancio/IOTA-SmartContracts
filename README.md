@@ -26,9 +26,15 @@ This is how the templated file structure looks like:
 
 ### Set code up!
 - Use this template repository to create your own.
-- Clone your git repository with:
+- Open VSCode and a terminal in it (In the menu : Terminal > New Terminal)
+- In the terminal, clone your git repository and enter it with:
 ```
-git clone --recurse-submodules <your_git_repository>
+git clone <your_git_repository>
+cd <your_clones_directory>
+```
+- Initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace <language> for rust or go. Example for development in Rust:
+```
+git submodule update --init --recursive -- smartcontract/rust
 ```
 - Open your git repository on VSCode
 - For Windows *only*, open file ".vscode/settings.json" and uncomment the setting "go.testFlags" entry "-buildmode=exe":
