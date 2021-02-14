@@ -9,7 +9,7 @@ import (
 
 // MustGetContractWasmFilePath ensures a given smart contract's wasm file exists
 func MustGetContractWasmFilePath(t *testing.T, contractName string) string {
-	const targetPath = "smartContracs/target/"
+	const targetPath = "../smartcontract/rust/pkg/"
 	const parentDirectoryLevel = "../"
 
 	filePath := targetPath + contractName + "_bg.wasm"
