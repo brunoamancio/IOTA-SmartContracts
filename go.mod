@@ -1,4 +1,4 @@
-module github.com/brunoamancio/IOTA-SmartContracts-Template-Base
+module github.com/brunoamancio/IOTA-SmartContracts
 
 go 1.15
 
