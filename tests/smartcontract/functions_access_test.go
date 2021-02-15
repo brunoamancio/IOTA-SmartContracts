@@ -11,9 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// Contract name - Defined in SmartContract/Cargo.toml > package > name
-const contractName = "my_iota_sc"
-
 // Test ensures only the expected callers have access to functions
 func Test_access_to_functions(t *testing.T) {
 	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
@@ -28,8 +25,8 @@ func Test_access_to_functions(t *testing.T) {
 	testutils.GrantDeployPermission(chain, chainOwnerKeyPair, contractCreatorAgentID)
 
 	// Deploy contract with contractOwnerKeyPair
-	contractFilePath := testutils.MustGetContractWasmFilePath(t, contractName)
-	err := chain.DeployWasmContract(contractCreatorKeyPair, contractName, contractFilePath)
+	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
+	err := chain.DeployWasmContract(contractCreatorKeyPair, testconstants.ContractName, contractFilePath)
 	require.NoError(t, err)
 
 	// Map of SC functions and function owners
@@ -47,7 +44,7 @@ func Test_access_to_functions(t *testing.T) {
 		t.Run(functionName, func(t *testing.T) {
 
 			// Defines which contract and function will be called by chain.PostRequest
-			reqParams := solo.NewCallParams(contractName, functionName)
+			reqParams := solo.NewCallParams(testconstants.ContractName, functionName)
 
 			// Calls SC function as chainOwner
 			_, err = chain.PostRequest(reqParams, chainOwnerKeyPair)

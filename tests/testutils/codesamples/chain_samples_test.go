@@ -3,6 +3,7 @@ package codesamples
 import (
 	"testing"
 
+	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils/testconstants"
 	"github.com/iotaledger/goshimmer/dapps/valuetransfers/packages/balance"
 	"github.com/iotaledger/wasp/packages/coretypes"
 	"github.com/iotaledger/wasp/packages/solo"
@@ -12,7 +13,7 @@ import (
 )
 
 func Test_CreateChain_chainCreatorSpecified(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	// Create address with dummy tokens in it.
 	chainOriginatorsWalletKeyPair := env.NewSignatureSchemeWithFunds()
@@ -46,7 +47,7 @@ func Test_CreateChain_chainCreatorSpecified(t *testing.T) {
 // Sample of how to create chain without specifying a chainOriginator.
 // A dummy chain originator is created in the background (by NewChain).
 func Test_CreateChain_NoChainCreatorSpecified(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	// Create a chain where chainCreatorsWalletKeyPair is the owner.
 	chain := env.NewChain(nil, "myChain")
@@ -61,7 +62,7 @@ func Test_CreateChain_NoChainCreatorSpecified(t *testing.T) {
 }
 
 func Test_SetChainFees(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	// Generate a dummy chain beloging to chain.OriginatorSigScheme
 	chain := env.NewChain(nil, "myChain")
@@ -92,7 +93,7 @@ func Test_SetChainFees(t *testing.T) {
 }
 
 func Test_SetChainFees_TestCharge(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	// Generate a keypair for the chain originator
 	chainOriginatorKeyPair := env.NewSignatureSchemeWithFunds()

@@ -3,6 +3,8 @@ package codesamples
 import (
 	"testing"
 
+	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils"
+	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils/testconstants"
 	"github.com/iotaledger/goshimmer/dapps/valuetransfers/packages/balance"
 	"github.com/iotaledger/wasp/packages/coretypes"
 	"github.com/iotaledger/wasp/packages/kv/codec"
@@ -14,7 +16,7 @@ import (
 
 /// This is a sample of how to send tokens from the value tangle to a chain, keeping the ownership of the tokens on that chain
 func Test_SendTokensToChain_NoContractFees(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
@@ -46,7 +48,7 @@ func Test_SendTokensToChain_NoContractFees(t *testing.T) {
 }
 
 func Test_SendAndReceiveTokens_NoContractFees(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
@@ -86,7 +88,7 @@ func Test_SendAndReceiveTokens_NoContractFees(t *testing.T) {
 }
 
 func Test_SendTokensToChain_WithContractFees(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
@@ -128,17 +130,16 @@ func Test_SendTokensToChain_WithContractFees(t *testing.T) {
 }
 
 func Test_SendTokensToContract_NoContractFees(t *testing.T) {
-	env := solo.New(t, false, false)
+	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
 	chain := env.NewChain(nil, "myChain")
 
 	// Uploads wasm of SC and deploys it into chain
-	const contractName = "my_iota_sc"
-	contractWasmFilePath := "<file path to contract.wasm>" // You can use if file is in SmartContract/pkg testutils.MustGetContractWasmFilePath(contractName)
-	err := chain.DeployWasmContract(nil, contractName, contractWasmFilePath)
+	contractWasmFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName) // You can use if file is in SmartContract/pkg
+	err := chain.DeployWasmContract(nil, testconstants.ContractName, contractWasmFilePath)
 	require.NoError(t, err)
 
 	// Loads contract information
-	contract, err := chain.FindContract(contractName)
+	contract, err := chain.FindContract(testconstants.ContractName)
 	require.NoError(t, err)
 	contractID := coretypes.NewContractID(chain.ChainID, contract.Hname())
 	contractAgentID := coretypes.NewAgentIDFromContractID(contractID)
