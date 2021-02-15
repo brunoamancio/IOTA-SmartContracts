@@ -22,11 +22,12 @@ func Test_access_to_functions(t *testing.T) {
 	// Create contractCreator key pair and give it permission to deploy into chain
 	contractCreatorKeyPair := env.NewSignatureSchemeWithFunds()
 	contractCreatorAgentID := coretypes.NewAgentIDFromAddress(contractCreatorKeyPair.Address())
-	chain.GrantDeployPermission(chainOwnerKeyPair, contractCreatorAgentID)
+	err := chain.GrantDeployPermission(chainOwnerKeyPair, contractCreatorAgentID)
+	require.NoError(t, err)
 
 	// Deploy contract with contractOwnerKeyPair
 	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
-	err := chain.DeployWasmContract(contractCreatorKeyPair, testconstants.ContractName, contractFilePath)
+	err = chain.DeployWasmContract(contractCreatorKeyPair, testconstants.ContractName, contractFilePath)
 	require.NoError(t, err)
 
 	// Map of SC functions and function owners
@@ -48,17 +49,17 @@ func Test_access_to_functions(t *testing.T) {
 
 			// Calls SC function as chainOwner
 			_, err = chain.PostRequest(reqParams, chainOwnerKeyPair)
-			// Verifies if access to SC function was given to caller. Fail if unauthorized acess.
+			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, chainOwnerKeyPair, err)
 
 			// Calls SC function as contractCreator
 			_, err = chain.PostRequest(reqParams, contractCreatorKeyPair)
-			// Verifies if access to SC function was given to caller. Fail if unauthorized acess.
+			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, contractCreatorKeyPair, err)
 
 			// Calls SC function as anyone else (random)
 			_, err = chain.PostRequest(reqParams, randomKeyPair)
-			// Verifies if access to SC function was given to caller. Fail if unauthorized acess.
+			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, randomKeyPair, err)
 		})
 	}
