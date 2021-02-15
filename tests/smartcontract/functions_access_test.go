@@ -22,7 +22,7 @@ func Test_access_to_functions(t *testing.T) {
 	// Create contractCreator key pair and give it permission to deploy into chain
 	contractCreatorKeyPair := env.NewSignatureSchemeWithFunds()
 	contractCreatorAgentID := coretypes.NewAgentIDFromAddress(contractCreatorKeyPair.Address())
-	testutils.GrantDeployPermission(chain, chainOwnerKeyPair, contractCreatorAgentID)
+	chain.GrantDeployPermission(chainOwnerKeyPair, contractCreatorAgentID)
 
 	// Deploy contract with contractOwnerKeyPair
 	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
