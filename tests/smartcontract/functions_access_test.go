@@ -32,7 +32,7 @@ func Test_access_to_functions(t *testing.T) {
 	// Map of SC functions and function owners
 	functionsToTest := make(map[string]signaturescheme.SignatureScheme)
 
-	// Name of the SC function to be requested and credential required to acess it
+	// Name of the SC function to be requested and credential required to access it
 	functionsToTest["my_sc_function"] = nil                                    // public function
 	functionsToTest["contract_creator_only_function"] = contractCreatorKeyPair // owner-only function
 	functionsToTest["chain_owner_only_function"] = chainOwnerKeyPair           // owner-only function
