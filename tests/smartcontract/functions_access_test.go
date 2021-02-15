@@ -30,6 +30,9 @@ func Test_access_to_functions(t *testing.T) {
 	err = chain.DeployWasmContract(contractCreatorKeyPair, testconstants.ContractName, contractFilePath)
 	require.NoError(t, err)
 
+	// Create random key pair
+	randomKeyPair := env.NewSignatureSchemeWithFunds()
+
 	// Map of SC functions and function owners
 	functionsToTest := make(map[string]signaturescheme.SignatureScheme)
 
@@ -37,9 +40,6 @@ func Test_access_to_functions(t *testing.T) {
 	functionsToTest["my_sc_function"] = nil                                    // public function
 	functionsToTest["contract_creator_only_function"] = contractCreatorKeyPair // owner-only function
 	functionsToTest["chain_owner_only_function"] = chainOwnerKeyPair           // owner-only function
-
-	// Create random key pair
-	randomKeyPair := env.NewSignatureSchemeWithFunds()
 
 	for functionName, ownerKeyPair := range functionsToTest {
 		t.Run(functionName, func(t *testing.T) {
