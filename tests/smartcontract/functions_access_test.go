@@ -44,7 +44,7 @@ func Test_access_to_functions(t *testing.T) {
 	for functionName, ownerKeyPair := range functionsToTest {
 		t.Run(functionName, func(t *testing.T) {
 
-			// Defines which contract and function will be called by chain.PostRequest
+			// Defines which contract and function will be called by chain.PostRequest.
 			reqParams := solo.NewCallParams(testconstants.ContractName, functionName)
 
 			// Calls SC function as chainOwner
