@@ -1,5 +1,6 @@
 use wasmlib::*;
 
+// panics if caller is not the contract creator
 pub fn caller_must_be_contract_creator(ctx: &ScFuncContext){
     let caller_agent_id = ctx.caller();
     let contract_creator_agent_id = ctx.contract_creator();
