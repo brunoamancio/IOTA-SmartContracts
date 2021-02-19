@@ -1,5 +1,5 @@
 use wasmlib::*;
-mod access_utils;
+use iota_sc_utils::*;
 
 #[no_mangle]
 fn on_load() {
@@ -16,18 +16,19 @@ fn on_load() {
 
 // Anyone can call this SC-Function
 fn my_sc_function(ctx: &ScFuncContext) {
+    // Logs a text
     ctx.log("my_sc_function");
 }
 
 // Only the contract creator can call this SC-Function
 fn contract_creator_only_function(ctx: &ScFuncContext) {
-    access_utils::caller_must_be_contract_creator(ctx);
+    access::caller_must_be_contract_creator(ctx);
     ctx.log("Caller is the contract creator =)");
 }
 
 // Only the chain owner can call this SC-Function
 fn chain_owner_only_function(ctx: &ScFuncContext){
-    access_utils::caller_must_be_chain_owner(ctx);
+    access::caller_must_be_chain_owner(ctx);
     ctx.log("Caller is the chain owner =)");
 }
 

@@ -1,0 +1,9 @@
+[package]
+name = "code_samples"
+version = "0.1.0"
+authors = ["Th3B0Y <brunoamancio.ti@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+wasmlib = { path = "../wasp/contracts/rust/wasmlib" }
+iota_sc_utils = { path = "../iota_sc_utils" }
