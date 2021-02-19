@@ -1,31 +1,23 @@
 {
-    "files.exclude": {
-    
-      "**/Cargo.lock": true,
-      
-      "**/LICENSE": true,
+  "files.exclude": {
+    "**/Cargo.lock": true,
+    "**/LICENSE": true,
+    "**/go.sum": true,
+    "**/.git*": true,
+    "*.md": true,
 
-      //"go.mod": true,
-      "**/go.sum": true,
-
-      "**/.git*" : true,
-            
-      "*.md" : true,
-      
-      "general-docs" : true,
-
-      "smartcontract/rust/target/" : true,
-      "smartcontract/rust/pkg/*.js" : true,
-      "smartcontract/rust/pkg/*.ts" : true,
-      "smartcontract/rust/pkg/package.json" : true,
-
-      "smartcontract/rust/wasp" : true
-    },
-    "go.testFlags": [
-      "-v",
-      //"-buildmode=exe" // Uncomment this on windows. Is is needed due to an issue caused by gcc when compiling the unit tests
-    ],
-    // "gopls": {
-    //   "experimentalWorkspaceModule" : true
-    // }, 
-  }
+    "general-docs": true,
+    "smartcontract/rust/target/": true,
+    "smartcontract/rust/pkg/*.js": true,
+    "smartcontract/rust/pkg/*.ts": true,
+    "smartcontract/rust/pkg/package.json": true,
+    "smartcontract/rust/wasp" : true
+  },
+  "go.testFlags": [
+    "-v",
+    //"-buildmode=exe" // Uncomment this on windows. Is is needed due to an issue caused by gcc when compiling the unit tests
+  ],
+  "rust-analyzer.updates.askBeforeDownload": false,
+  "rust-analyzer.linkedProjects": ["smartcontract/rust/Cargo.toml"]
+  //"editor.formatOnSave": true
+}
