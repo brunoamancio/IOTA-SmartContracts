@@ -7,10 +7,10 @@
     "*.md": true,
 
     "general-docs": true,
-    "smartcontract/rust/target/": true,
-    "smartcontract/rust/pkg/*.js": true,
-    "smartcontract/rust/pkg/*.ts": true,
-    "smartcontract/rust/pkg/package.json": true,
+    "**/target/": true,
+    "**/pkg/*.js": true,
+    "**/pkg/*.ts": true,
+    "**/pkg/package.json": true,
     "smartcontract/rust/wasp" : true
   },
   "go.testFlags": [
