@@ -18,6 +18,13 @@ fn on_load() {
 fn my_sc_function(ctx: &ScFuncContext) {
     // Logs a text
     ctx.log("my_sc_function");
+
+    // Reads argument called "my_param" passed to SC function. Empty if not found.
+    const MY_PARAM : &str = "my_param";
+    let param_value = params::get_string(MY_PARAM, ctx);
+    if !param_value.is_empty() {
+        ctx.log(&param_value);
+    }
 }
 
 // Only the contract creator can call this SC-Function
