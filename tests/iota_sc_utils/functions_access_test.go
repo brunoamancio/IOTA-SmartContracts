@@ -1,4 +1,4 @@
-package iota_sc_utils
+package iotascutils
 
 import (
 	"testing"
