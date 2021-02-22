@@ -11,7 +11,7 @@ This is how the templated file structure looks like:
 
 ---
 
-### Requirements for Go and Rust development
+### Requirements for both, Rust and Go development
 - [Go](https://golang.org/dl/) - [Why Go?](general-docs/WhyGo.md)
 - Gcc (or equivalent for Windows [(TDM-GCC)](https://jmeubank.github.io/tdm-gcc/)) - [Why Gcc?](general-docs/WhyGo.md)
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
@@ -21,7 +21,7 @@ This is how the templated file structure looks like:
 - [Rust](https://www.rust-lang.org/tools/install)
 - [Wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
-  - [Rust extension](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
+  - [Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer)
   - [Better TOML](https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml) *Optional nice to have 
 
 ### Set code up!
@@ -29,8 +29,7 @@ This is how the templated file structure looks like:
 - Open VSCode and a terminal in it (In the menu : Terminal > New Terminal)
 - In the terminal, clone your git repository and open it with:
 ```
-git clone <your_git_repository>
-code -r <your_clones_directory>
+git clone <your_git_repository> && code -r IOTA-SmartContracts
 ```
 - In the terminal, initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace `<language>` for `rust` or `go` (go is not available yet). Example for development in Rust:
 ```
