@@ -29,7 +29,7 @@ This is how the templated file structure looks like:
 - Open VSCode and a terminal in it (In the menu : Terminal > New Terminal)
 - In the terminal, clone your git repository:
 ```
-git clone <your_git_repository>
+git clone <your_git_repository> && cd IOTA-SmartContracts
 ```
 - In the terminal, initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace `<language>` for `rust` or `go` (go is not available yet). Example for development in Rust:
 ```
@@ -37,7 +37,7 @@ git submodule update --init --recursive -- smartcontract/rust
 ```
 - In the terminal, open your git repository on VSCode
 ```
-code -r IOTA-SmartContracts
+code -r .
 ```
 - For Windows *only*, open file ".vscode/settings.json" and uncomment the setting "go.testFlags" entry "-buildmode=exe":
 ![Go.testFlags for Windows](general-docs/go-testflags.png)
