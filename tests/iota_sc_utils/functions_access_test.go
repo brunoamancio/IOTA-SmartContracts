@@ -1,4 +1,4 @@
-package libtest
+package iota_sc_utils
 
 import (
 	"testing"
