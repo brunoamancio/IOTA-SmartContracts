@@ -39,7 +39,7 @@ func Test_SendTokensToChain_NoContractFees(t *testing.T) {
 
 	// Transfer from value tangle to the chain
 	transferRequest := solo.NewCallParams(accounts.Name, accounts.FuncDeposit).WithTransfer(balance.ColorIOTA, transferValueIotas)
-	_, err := chain.PostRequest(transferRequest, senderWalletKeyPair)
+	_, err := chain.PostRequestSync(transferRequest, senderWalletKeyPair)
 	require.NoError(t, err)
 
 	// Wallet balances -> After transfer to chain
@@ -76,7 +76,7 @@ func Test_SendAndReceiveTokens_NoContractFees(t *testing.T) {
 	transferRequest := solo.NewCallParams(accounts.Name, accounts.FuncDeposit, accounts.ParamAgentID, codec.EncodeAgentID(receiverWalletAgentID)).
 		WithTransfer(balance.ColorIOTA, transferValueIotas)
 
-	_, err := chain.PostRequest(transferRequest, senderWalletKeyPair)
+	_, err := chain.PostRequestSync(transferRequest, senderWalletKeyPair)
 	require.NoError(t, err)
 
 	// Wallet balances -> After transfer
@@ -113,7 +113,7 @@ func Test_SendTokensToChain_WithContractFees(t *testing.T) {
 	// Request to chain change fee settings
 	const newOwnerFee = int64(100)
 	transferRequest := solo.NewCallParams(root.Interface.Name, root.FuncSetContractFee, root.ParamHname, accounts.Interface.Hname(), root.ParamOwnerFee, newOwnerFee)
-	_, err := chain.PostRequest(transferRequest, chain.OriginatorSigScheme)
+	_, err := chain.PostRequestSync(transferRequest, chain.OriginatorSigScheme)
 	require.NoError(t, err)
 
 	// Wallet balance in chain -> Before transfer
@@ -121,7 +121,7 @@ func Test_SendTokensToChain_WithContractFees(t *testing.T) {
 
 	// Transfer from value tangle to the chain
 	transferRequest = solo.NewCallParams(accounts.Name, accounts.FuncDeposit).WithTransfer(balance.ColorIOTA, transferValueIotas)
-	_, err = chain.PostRequest(transferRequest, senderWalletKeyPair)
+	_, err = chain.PostRequestSync(transferRequest, senderWalletKeyPair)
 	require.NoError(t, err)
 
 	// Wallet balances -> After transfer to chain
@@ -158,7 +158,7 @@ func Test_SendTokensToContract_NoContractFees(t *testing.T) {
 
 	// Transfer from value tangle to the contract (in the chain)
 	transferRequest := solo.NewCallParams(accounts.Name, accounts.FuncDeposit, accounts.ParamAgentID, contractAgentID).WithTransfer(balance.ColorIOTA, transferValueIotas)
-	_, err = chain.PostRequest(transferRequest, senderWalletKeyPair)
+	_, err = chain.PostRequestSync(transferRequest, senderWalletKeyPair)
 	require.NoError(t, err)
 
 	// Wallet balances -> After transfer

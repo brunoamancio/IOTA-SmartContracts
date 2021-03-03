@@ -37,7 +37,7 @@ func Test_math_functions(t *testing.T) {
 			reqParams := solo.NewCallParams(testconstants.ContractName, functionName)
 
 			// Calls SC function as chainOwner
-			_, err := chain.PostRequest(reqParams, nil)
+			_, err := chain.PostRequestSync(reqParams, nil)
 
 			// Verifies if SC function call is executed or fails
 			if expectSuccess {

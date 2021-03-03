@@ -48,17 +48,17 @@ func Test_access_to_functions(t *testing.T) {
 			reqParams := solo.NewCallParams(testconstants.ContractName, functionName)
 
 			// Calls SC function as chainOwner
-			_, err = chain.PostRequest(reqParams, chainOwnerKeyPair)
+			_, err = chain.PostRequestSync(reqParams, chainOwnerKeyPair)
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, chainOwnerKeyPair, err)
 
 			// Calls SC function as contractCreator
-			_, err = chain.PostRequest(reqParams, contractCreatorKeyPair)
+			_, err = chain.PostRequestSync(reqParams, contractCreatorKeyPair)
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, contractCreatorKeyPair, err)
 
 			// Calls SC function as anyone else (random)
-			_, err = chain.PostRequest(reqParams, randomKeyPair)
+			_, err = chain.PostRequestSync(reqParams, randomKeyPair)
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
 			testutils.RequireAccess(t, ownerKeyPair, randomKeyPair, err)
 		})

@@ -31,6 +31,6 @@ func TestLib(t *testing.T) {
 	req := solo.NewCallParams(testconstants.ContractName, functionName)
 
 	// Calls contract my_iota_sc, function my_sc_function
-	_, err = chain.PostRequest(req, nil)
+	_, err = chain.PostRequestSync(req, nil)
 	require.NoError(t, err)
 }

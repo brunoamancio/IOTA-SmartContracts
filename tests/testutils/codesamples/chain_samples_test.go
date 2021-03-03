@@ -76,13 +76,13 @@ func Test_SetChainFees(t *testing.T) {
 	// Request to chain - change owner fee settings
 	const newChainOwnerFee = int64(1000)
 	transferRequest := solo.NewCallParams(root.Interface.Name, root.FuncSetContractFee, root.ParamHname, accounts.Interface.Hname(), root.ParamOwnerFee, newChainOwnerFee)
-	_, err := chain.PostRequest(transferRequest, chain.OriginatorSigScheme)
+	_, err := chain.PostRequestSync(transferRequest, chain.OriginatorSigScheme)
 	require.NoError(t, err)
 
 	// Request to chain - change owner fee settings
 	const newValidatorFee = int64(200)
 	transferRequest = solo.NewCallParams(root.Interface.Name, root.FuncSetContractFee, root.ParamHname, accounts.Interface.Hname(), root.ParamValidatorFee, newValidatorFee)
-	_, err = chain.PostRequest(transferRequest, chain.OriginatorSigScheme)
+	_, err = chain.PostRequestSync(transferRequest, chain.OriginatorSigScheme)
 	require.NoError(t, err)
 
 	// Chain fees after change
@@ -126,7 +126,7 @@ func Test_SetChainFees_TestCharge(t *testing.T) {
 	// Request to chain change fee settings
 	const newOwnerFee = int64(100)
 	transferRequest := solo.NewCallParams(root.Interface.Name, root.FuncSetContractFee, root.ParamHname, accounts.Interface.Hname(), root.ParamOwnerFee, newOwnerFee)
-	_, err := chain.PostRequest(transferRequest, chainOriginatorKeyPair)
+	_, err := chain.PostRequestSync(transferRequest, chainOriginatorKeyPair)
 	require.NoError(t, err)
 	chainOriginatorBalanceInValueTangleAfterFeeIsChanged := chainOriginatorBalanceInValueTangleAfterChainIsCreated - iotaTokensConsumedByRequest
 	chainOriginatorBalanceInChainAfterFeeIsChanged := chainOriginatorBalanceInChainAfterChainIsCreated + iotaTokensConsumedByRequest
@@ -139,7 +139,7 @@ func Test_SetChainFees_TestCharge(t *testing.T) {
 
 	// User sends a request to the chain (He wants to deposit iotas to his own account in the chain)
 	transferRequest = solo.NewCallParams(accounts.Name, accounts.FuncDeposit).WithTransfer(balance.ColorIOTA, transferValueIotas)
-	_, err = chain.PostRequest(transferRequest, userKeyPair)
+	_, err = chain.PostRequestSync(transferRequest, userKeyPair)
 	require.NoError(t, err)
 
 	// User gets the iota tokens in his account in the chain
