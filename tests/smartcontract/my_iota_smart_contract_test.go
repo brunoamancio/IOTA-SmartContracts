@@ -5,8 +5,7 @@ import (
 
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils"
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils/testconstants"
-	"github.com/iotaledger/wasp/packages/solo"
-	"github.com/stretchr/testify/require"
+	notsolo "github.com/brunoamancio/NotSolo"
 )
 
 //  -----------------------------------------------  //
@@ -19,18 +18,14 @@ func TestLib(t *testing.T) {
 	// Name of the SC function to be requested - Defined in lib.rs > add_call > my_sc_function
 	functionName := "my_sc_function"
 
-	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
+	notSolo := notsolo.New(t)
+
 	chainName := testconstants.ContractName + "Chain"
-	chain := env.NewChain(nil, chainName)
+	chain := notSolo.Chain.NewChain(nil, chainName)
 
 	// Uploads wasm of SC and deploys it into chain
-	err := chain.DeployWasmContract(nil, testconstants.ContractName, contractWasmFilePath)
-	require.NoError(t, err)
+	notSolo.Chain.DeployWasmContract(chain, nil, testconstants.ContractName, contractWasmFilePath)
 
-	// Defines which contract and function will be called by chain.PostRequest
-	req := solo.NewCallParams(testconstants.ContractName, functionName)
-
-	// Calls contract my_iota_sc, function my_sc_function
-	_, err = chain.PostRequestSync(req, nil)
-	require.NoError(t, err)
+	// Call contract 'my_iota_sc', function 'my_sc_function'
+	notSolo.Request.MustPost(nil, chain, testconstants.ContractName, functionName)
 }

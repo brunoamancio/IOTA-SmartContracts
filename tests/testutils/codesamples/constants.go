@@ -1,8 +1,9 @@
 package codesamples
 
-import "github.com/iotaledger/wasp/packages/testutil"
+// Used to fund address in NewSignatureSchemeWithFunds. // Defined in iotaledger/wasp/packages/testutiltestutil.RequestFundsAmount.
+const initialWalletFunds = 1337
 
-const initialWalletFunds = testutil.RequestFundsAmount // used to fund address in NewSignatureSchemeWithFunds
+// Default amount of IOTAs to transfer in unit tests.
 const transferValueIotas = 1000
 
 /* INTERESTING FACT: Calls to a smart contract require 1 EXTRA iota token to be sent to the chain it is located in.

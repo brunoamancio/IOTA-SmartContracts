@@ -5,18 +5,17 @@ import (
 
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils"
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils/testconstants"
-	"github.com/iotaledger/wasp/packages/solo"
+	notsolo "github.com/brunoamancio/NotSolo"
 	"github.com/stretchr/testify/require"
 )
 
 func Test_math_functions(t *testing.T) {
-	env := solo.New(t, testconstants.Debug, testconstants.StackTrace)
-	chain := env.NewChain(nil, "mathChain")
+	notSolo := notsolo.New(t)
+	chain := notSolo.Chain.NewChain(nil, "mathChain")
 
 	// Deploy contract with chainOwnerKeyPair
 	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
-	err := chain.DeployWasmContract(nil, testconstants.ContractName, contractFilePath)
-	require.NoError(t, err)
+	notSolo.Chain.DeployWasmContract(chain, nil, testconstants.ContractName, contractFilePath)
 
 	typesToTest := []string{"u8", "u16", "u32", "u64", "usize", "i8", "i16", "i32", "i64", "isize"}
 	operationsToTest := []string{"add", "sub", "mul", "div"}
@@ -33,11 +32,9 @@ func Test_math_functions(t *testing.T) {
 
 	for functionName, expectSuccess := range functionsToTest {
 		t.Run(functionName, func(t *testing.T) {
-			// Defines which contract and function will be called by chain.PostRequest.
-			reqParams := solo.NewCallParams(testconstants.ContractName, functionName)
 
 			// Calls SC function as chainOwner
-			_, err := chain.PostRequestSync(reqParams, nil)
+			_, err := notSolo.Request.Post(nil, chain, testconstants.ContractName, functionName)
 
 			// Verifies if SC function call is executed or fails
 			if expectSuccess {
