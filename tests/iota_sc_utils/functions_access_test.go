@@ -13,7 +13,7 @@ import (
 func Test_access_to_functions(t *testing.T) {
 	notSolo := notsolo.New(t)
 
-	// Create chain with chainOwnerKeyPair
+	// Create chain with chainOwnerSigScheme
 	chainOwnerSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
 	chain := notSolo.Chain.NewChain(chainOwnerSigScheme, "test_access_chain")
 
@@ -21,7 +21,7 @@ func Test_access_to_functions(t *testing.T) {
 	contractOriginatorSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
 	notSolo.Chain.GrantDeployPermission(chain, contractOriginatorSigScheme)
 
-	// Deploy contract with contractOwnerKeyPair
+	// Deploy contract with contractOwnerSigScheme
 	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
 	notSolo.Chain.DeployWasmContract(chain, contractOriginatorSigScheme, testconstants.ContractName, contractFilePath)
 
@@ -36,23 +36,23 @@ func Test_access_to_functions(t *testing.T) {
 	functionsToTest["contract_creator_only_function"] = contractOriginatorSigScheme // owner-only function
 	functionsToTest["chain_owner_only_function"] = chainOwnerSigScheme              // owner-only function
 
-	for functionName, ownerKeyPair := range functionsToTest {
+	for functionName, ownerSigScheme := range functionsToTest {
 		t.Run(functionName, func(t *testing.T) {
 			// Calls SC function as chainOwner
 			_, err := notSolo.Request.Post(chainOwnerSigScheme, chain, testconstants.ContractName, functionName)
 
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
-			testutils.RequireAccess(t, ownerKeyPair, chainOwnerSigScheme, err)
+			testutils.RequireAccess(t, ownerSigScheme, chainOwnerSigScheme, err)
 
 			// Calls SC function as contractCreator
 			_, err = notSolo.Request.Post(contractOriginatorSigScheme, chain, testconstants.ContractName, functionName)
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
-			testutils.RequireAccess(t, ownerKeyPair, contractOriginatorSigScheme, err)
+			testutils.RequireAccess(t, ownerSigScheme, contractOriginatorSigScheme, err)
 
 			// Calls SC function as anyone else (random)
 			_, err = notSolo.Request.Post(randomSigScheme, chain, testconstants.ContractName, functionName)
 			// Verifies if access to SC function was given to caller. Fail if unauthorized access.
-			testutils.RequireAccess(t, ownerKeyPair, randomSigScheme, err)
+			testutils.RequireAccess(t, ownerSigScheme, randomSigScheme, err)
 		})
 	}
 }

@@ -78,19 +78,19 @@ func Test_SetChainFees(t *testing.T) {
 func Test_SetChainFees_TestCharge(t *testing.T) {
 	notSolo := notsolo.New(t)
 
-	// Generate a keypair for the chain originator
-	chainOriginatorKeyPair := notSolo.SigScheme.NewSignatureSchemeWithFunds()
-	notSolo.ValueTangle.RequireBalance(chainOriginatorKeyPair, balance.ColorIOTA, initialWalletFunds)
+	// Generate a SigScheme for the chain originator
+	chainOriginatorSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	notSolo.ValueTangle.RequireBalance(chainOriginatorSigScheme, balance.ColorIOTA, initialWalletFunds)
 
-	// Generate a keypair for a wallet using the chain (will be charged for it)
-	userKeyPair := notSolo.SigScheme.NewSignatureSchemeWithFunds()
-	notSolo.ValueTangle.RequireBalance(userKeyPair, balance.ColorIOTA, initialWalletFunds)
+	// Generate a SigScheme for a wallet using the chain (will be charged for it)
+	userSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	notSolo.ValueTangle.RequireBalance(userSigScheme, balance.ColorIOTA, initialWalletFunds)
 
 	// Generate a dummy chain beloging to the chain originator
-	chain := notSolo.Chain.NewChain(chainOriginatorKeyPair, "myChain")
+	chain := notSolo.Chain.NewChain(chainOriginatorSigScheme, "myChain")
 	chainOriginatorBalanceInValueTangleAfterChainIsCreated := int64(initialWalletFunds - iotaTokensConsumedByRequest - iotaTokensConsumedByChain)
 	chainOriginatorBalanceInChainAfterChainIsCreated := int64(iotaTokensConsumedByRequest)
-	notSolo.ValueTangle.RequireBalance(chainOriginatorKeyPair, balance.ColorIOTA, chainOriginatorBalanceInValueTangleAfterChainIsCreated)
+	notSolo.ValueTangle.RequireBalance(chainOriginatorSigScheme, balance.ColorIOTA, chainOriginatorBalanceInValueTangleAfterChainIsCreated)
 	notSolo.ValueTangle.RequireAddressBalance(chain.ChainAddress, chain.ChainColor, iotaTokensConsumedByChain)
 	notSolo.Chain.RequireBalance(chain.OriginatorSigScheme, chain, balance.ColorIOTA, chainOriginatorBalanceInChainAfterChainIsCreated)
 
@@ -114,14 +114,14 @@ func Test_SetChainFees_TestCharge(t *testing.T) {
 	require.Equal(t, int64(0), validatorFee)
 
 	// User sends a request to the chain (He wants to deposit iotas to his own account in the chain)
-	notSolo.ValueTangle.TransferToChainToSelf(userKeyPair, chain, balance.ColorIOTA, transferValueIotas)
+	notSolo.ValueTangle.TransferToChainToSelf(userSigScheme, chain, balance.ColorIOTA, transferValueIotas)
 
 	// User gets the iota tokens in his account in the chain
-	notSolo.ValueTangle.RequireBalance(userKeyPair, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest) // Transfered tokens are debited from the value tangle
+	notSolo.ValueTangle.RequireBalance(userSigScheme, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest) // Transfered tokens are debited from the value tangle
 	// Fee is charged from the funds transfered with the request
-	notSolo.Chain.RequireBalance(userKeyPair, chain, balance.ColorIOTA, transferValueIotas+iotaTokensConsumedByRequest-ownerFee) // His tokens in the chain minus fees
+	notSolo.Chain.RequireBalance(userSigScheme, chain, balance.ColorIOTA, transferValueIotas+iotaTokensConsumedByRequest-ownerFee) // His tokens in the chain minus fees
 
 	// Chain owner gets fees from the operation
-	notSolo.ValueTangle.RequireBalance(chainOriginatorKeyPair, balance.ColorIOTA, chainOriginatorBalanceInValueTangleAfterFeeIsChanged)     // No change in value tangle
-	notSolo.Chain.RequireBalance(chainOriginatorKeyPair, chain, balance.ColorIOTA, chainOriginatorBalanceInChainAfterFeeIsChanged+ownerFee) // He gets the fees in the chain
+	notSolo.ValueTangle.RequireBalance(chainOriginatorSigScheme, balance.ColorIOTA, chainOriginatorBalanceInValueTangleAfterFeeIsChanged)     // No change in value tangle
+	notSolo.Chain.RequireBalance(chainOriginatorSigScheme, chain, balance.ColorIOTA, chainOriginatorBalanceInChainAfterFeeIsChanged+ownerFee) // He gets the fees in the chain
 }
