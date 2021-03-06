@@ -1,4 +1,4 @@
-## IOTA smart contracts - Template used to develop in any supported language
+## Template used to implement IOTA smart contracts
 
 A simple template used to start developing your own smart contracts for ISCP (IOTA Smart Contract Protocol) in Rust and write unit tests in Go. In order to develop using the environment set up by this template, you need to have good understanding of the Rust and Go languages.
 
@@ -11,16 +11,13 @@ This is how the templated file structure looks like:
 
 ---
 
-### Requirements for both, Rust and Go development
+### Requirements
 - [Go](https://golang.org/dl/) - [Why Go?](general-docs/WhyGo.md)
 - Gcc (or equivalent for Windows [(TDM-GCC)](https://jmeubank.github.io/tdm-gcc/)) - [Why Gcc?](general-docs/WhyGo.md)
-- [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
-  - [Go Extension](https://marketplace.visualstudio.com/items?itemName=golang.Go)
-
-### Extra requirements for development in Rust
 - [Rust](https://www.rust-lang.org/tools/install)
 - [Wasm-pack](https://rustwasm.github.io/wasm-pack/installer/)
 - [Visual Studio Code](https://code.visualstudio.com/Download) (VSCode)
+  - [Go Extension](https://marketplace.visualstudio.com/items?itemName=golang.Go)
   - [Rust Analyzer](https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer)
   - [Better TOML](https://marketplace.visualstudio.com/items?itemName=bungcip.better-toml) *Optional nice to have 
 
@@ -30,10 +27,6 @@ This is how the templated file structure looks like:
 - In the terminal, clone your git repository:
 ```
 git clone <your_git_repository> && cd <your_git_repositories_name>
-```
-- In the terminal, initialize the submodule for the language you want to develop in, with `git submodule update --init --recursive -- smartcontract/<language>` and replace `<language>` for `rust` or `go` (go is not available yet). Example for development in Rust:
-```
-git submodule update --init --recursive -- smartcontract/rust
 ```
 - In the terminal, open your git repository on VSCode
 ```
