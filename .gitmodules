@@ -1,4 +1,0 @@
-[submodule "smartcontract/rust"]
-	path = smartcontract/rust
-	url = https://github.com/brunoamancio/IOTA-SmartContracts-HelloWorld-Rust.git
-	branch = main
