@@ -28,10 +28,15 @@ This is how the templated file structure looks like:
 ```
 git clone <your_git_repository> && cd <your_git_repositories_name>
 ```
+- In the terminal, initialize the wasp submodule with:
+```
+git submodule update --init --recursive -- smartcontract/rust/wasp
+```
 - In the terminal, open your git repository on VSCode
 ```
 code -r .
 ```
+
 - For Windows *only*, open file ".vscode/settings.json" and uncomment the setting "go.testFlags" entry "-buildmode=exe":
 ![Go.testFlags for Windows](general-docs/go-testflags.png)
 - On VSCode, open the replace functionality (Edit > Replace in files) 
