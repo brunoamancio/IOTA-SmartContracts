@@ -1,0 +1,4 @@
+[submodule "wasp"]
+	path = smartcontract/rust/wasp
+	url = https://github.com/iotaledger/wasp.git
+	branch = develop
