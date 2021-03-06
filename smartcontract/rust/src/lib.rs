@@ -16,6 +16,7 @@ fn on_load() {
 
     // SC Views
     exports.add_view("my_sc_view", my_sc_view);
+    exports.add_view("view_my_boolean", view_my_boolean)
 }
 
 // Anyone can call this SC function
@@ -51,5 +52,26 @@ fn chain_owner_only_function(ctx: &ScFuncContext){
 
 // Public view
 fn my_sc_view(ctx: &ScViewContext) {
-    ctx.log("my_sc_view");
+    ctx.log("Hello world!");
+}
+
+
+// Parameter passed into view_my_boolean
+const PARAM_HEXADECIMAL: &str = "hexadecimal";
+// Parameter returned from view_my_boolean
+const PARAM_MATCHES_EXPECTED: &str = "matches_expected";
+
+// Public view
+// | Type    | Param name               | Rust type | Go Type | Description 
+// | Input   | PARAM_HEXADECIMAL        | Vec<u8>   | []byte  | bytes representation of a hexadecimal number
+// | Output  | PARAM_MATCHES_EXPECTED   | Vec<u8>   | []byte  | true if the input parameter PARAM_HEXADECIMAL is equal to 0x01ffc9a7
+fn view_my_boolean(ctx: &ScViewContext) {
+
+    // Reads value passed as argument from the call to this view
+    let input_param_hexadecimal : Vec<u8> = params::must_get_bytes(PARAM_HEXADECIMAL, ctx);
+    let expected_hexadecimal : &[u8] = &[0x01, 0xff, 0xc9, 0xa7]; // this represents the hexadecimal value 0x01ffc9a7 
+    let is_match = input_param_hexadecimal == expected_hexadecimal;
+
+    // Sets the value of PARAM_MATCHES_EXPECTED to is_match. It is now a property in return structure of this view.
+    results::set_bool(PARAM_MATCHES_EXPECTED, is_match, ctx);
 }

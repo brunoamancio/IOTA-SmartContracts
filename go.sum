@@ -67,6 +67,8 @@ github.com/bketelsen/crypt v0.0.3-0.20200106085610-5cbc8cc4026c/go.mod h1:MKsuJm
 github.com/briandowns/spinner v1.11.1/go.mod h1:QOuQk7x+EaDASo80FEXwlwiA+j/PPIcX3FScO+3/ZPQ=
 github.com/brunoamancio/NotSolo v0.9.2-0.20210304030854-884e3bf32288 h1:j1ssynTC2ciaPxKw1mIIhhOsT+Rk68+61Tw5oNCg8Eg=
 github.com/brunoamancio/NotSolo v0.9.2-0.20210304030854-884e3bf32288/go.mod h1:zRNOlbQ1TIoq0PWm55vns0Eo5QHVR+k2gAPq5BeyJIs=
+github.com/brunoamancio/NotSolo v0.9.2-0.20210306064034-b80fe6b8c93b h1:ErfN1YqH14HzVOTk3jnb0tSi4fpQlQzYIqfU+HuID4c=
+github.com/brunoamancio/NotSolo v0.9.2-0.20210306064034-b80fe6b8c93b/go.mod h1:zRNOlbQ1TIoq0PWm55vns0Eo5QHVR+k2gAPq5BeyJIs=
 github.com/btcsuite/btcd v0.0.0-20190213025234-306aecffea32/go.mod h1:DrZx5ec/dmnfpw9KyYoQyYo7d0KEvTkk/5M/vbZjAr8=
 github.com/btcsuite/btcd v0.0.0-20190523000118-16327141da8c/go.mod h1:3J08xEfcugPacsc34/LKRU2yO7YmuT8yt28J8k2+rrI=
 github.com/btcsuite/btcd v0.0.0-20190824003749-130ea5bddde3/go.mod h1:3J08xEfcugPacsc34/LKRU2yO7YmuT8yt28J8k2+rrI=

@@ -35,3 +35,19 @@ pub fn get_i64<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> i
     }
     return  0;
 }
+
+/// Tries to get bytes parameter. Panics if it can't find it.
+pub fn must_get_bytes<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> Vec<u8> {
+    let param = ctx.params().get_bytes(param_name);
+    ctx.require(param.exists(), "bytes parameter not found");
+    return param.value();
+}
+
+/// Tries to get bytes parameter. Returns empty vector if it can't find it.
+pub fn get_bytes<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> Vec<u8> {
+    let param = ctx.params().get_bytes(param_name);
+    if param.exists() {
+        return param.value();
+    }
+    return Vec::new();
+}
