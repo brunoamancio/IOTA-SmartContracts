@@ -42,7 +42,7 @@ func Test_CreateChain_NoChainCreatorSpecified(t *testing.T) {
 	require.NotEqual(t, chain.ChainColor, balance.ColorIOTA)
 
 	// IMPORTANT: When a chain is created, 1 IOTA is colored with the chain's color and sent to the chain's address in the value tangle
-	notSolo.ValueTangle.RequireBalance(chain.OriginatorSigScheme, chain.ChainColor, iotaTokensConsumedByChain)
+	notSolo.ValueTangle.RequireBalance(chain.ChainSigScheme, chain.ChainColor, iotaTokensConsumedByChain)
 
 	// IMPORTANT: When a chain is created, 1 IOTA is sent from the originator's account in the value tangle their account in the chain
 	notSolo.Chain.RequireBalance(chain.OriginatorSigScheme, chain, balance.ColorIOTA, iotaTokensConsumedByRequest)
