@@ -1,44 +1,18 @@
 use wasmlib::*;
+use crate::getter::Getter;
+use crate::getter::PARAMS;
 
-// -------------------------------------------------------------------------------------------------------------------- //
-//  Feel free to add any functions related to params here. Don't forget to make a pull request to the template repo. :) //
-// -------------------------------------------------------------------------------------------------------------------- //
+// Primitive types
+add_impl_pub_fns!(PARAMS, must_get_string, get_string, String);
+add_impl_pub_fns!(PARAMS, must_get_int64, get_int64, i64);
+add_impl_pub_fns!(PARAMS, must_get_bytes, get_bytes, Vec<u8>);
 
-/// Tries to get &str parameter. Panics if it can't find it.
-pub fn must_get_string<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> String {
-    let param = ctx.params().get_string(param_name);
-    ctx.require(param.exists(), "string parameter not found");
-    param.value()
-}
-
-/// Tries to get &str parameter. Returns empty &str if it can't find it.
-pub fn get_string<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> String {
-    let param = ctx.params().get_string(param_name);
-    param.value()
-}
-
-/// Tries to get i64 parameter. Panics if it can't find it.
-pub fn must_get_i64<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> i64 {
-    let param = ctx.params().get_int64(param_name);
-    ctx.require(param.exists(), "string parameter not found");
-    param.value()
-} 
-
-/// Tries to get i64 parameter. Returns 0 if it can't find it.
-pub fn get_i64<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> i64 {
-    let param = ctx.params().get_int64(param_name);
-    param.value()
-}
-
-/// Tries to get bytes parameter. Panics if it can't find it.
-pub fn must_get_bytes<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> Vec<u8> {
-    let param = ctx.params().get_bytes(param_name);
-    ctx.require(param.exists(), "bytes parameter not found");
-    param.value()
-}
-
-/// Tries to get bytes parameter. Returns empty vector if it can't find it.
-pub fn get_bytes<TContext : ScBaseContext>(param_name : &str, ctx: &TContext) -> Vec<u8> {
-    let param = ctx.params().get_bytes(param_name);
-    param.value()
-}
+// ISCP Types
+add_impl_pub_fns!(PARAMS, must_get_agent_id, get_agent_id, ScAgentId);
+add_impl_pub_fns!(PARAMS, must_get_address, get_address, ScAddress);
+add_impl_pub_fns!(PARAMS, must_get_request_id, get_request_id, ScRequestId);
+add_impl_pub_fns!(PARAMS, must_get_hname, get_hname, ScHname);
+add_impl_pub_fns!(PARAMS, must_get_hash, get_hash, ScHash);
+add_impl_pub_fns!(PARAMS, must_get_contract_id, get_contract_id, ScContractId);
+add_impl_pub_fns!(PARAMS, must_get_color, get_color, ScColor);
+add_impl_pub_fns!(PARAMS, must_get_chain_id, get_chain_id, ScChainId);
