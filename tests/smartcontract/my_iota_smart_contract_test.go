@@ -13,7 +13,7 @@ import (
 //  -----------------------------------------------  //
 
 func TestLib(t *testing.T) {
-	contractWasmFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName) // You can use if file is in SmartContract/pkg
+	contractWasmFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName) // You can use if file is in SmartContract/rust/pkg
 
 	// Name of the SC function to be requested - Defined in lib.rs > add_call > my_sc_function
 	functionName := "my_sc_function"

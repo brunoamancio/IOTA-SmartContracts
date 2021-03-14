@@ -1,4 +1,4 @@
-  
+
 [package]
 edition = "2018"
 name = "my_iota_sc"
@@ -15,10 +15,11 @@ crate-type = ["cdylib", "rlib"]
 default = ["console_error_panic_hook"]
 
 [dependencies]
-iota_sc_utils = { path = "iota_sc_utils" }
-wasmlib = { path = "wasp/contracts/rust/wasmlib" }
 console_error_panic_hook = { version = "0.1.6", optional = true }
 wee_alloc = { version = "0.4.5", optional = true }
+
+wasmlib = { git = "https://github.com/brunoamancio/Wasm-lib", tag="v0.1.0" }
+iota_sc_utils = { git = "https://github.com/brunoamancio/IOTA-SC-Utils", tag = "v0.8.4"}
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"

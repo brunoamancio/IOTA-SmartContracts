@@ -10,8 +10,7 @@
     "**/target/": true,
     "**/pkg/*.js": true,
     "**/pkg/*.ts": true,
-    "**/pkg/package.json": true,
-    "smartcontract/rust/wasp" : true
+    "**/pkg/package.json": true
   },
   "go.testFlags": [
     "-v",
