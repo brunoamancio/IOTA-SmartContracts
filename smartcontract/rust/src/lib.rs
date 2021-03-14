@@ -1,4 +1,4 @@
-use wasmlib::*;
+use iota_sc_utils::wasmlib::*;
 use iota_sc_utils::*;
 pub mod math_test_functions;
 

@@ -1,4 +1,4 @@
-use wasmlib::{ScBaseContext, ScExports};
+use iota_sc_utils::wasmlib::{ScBaseContext, ScExports};
 use iota_sc_utils::math::SafeMath;
 
 pub trait SafeMathScFunction {
