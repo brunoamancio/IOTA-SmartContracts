@@ -16,7 +16,7 @@ fn on_load() {
 
     // SC Views
     exports.add_view("my_sc_view", my_sc_view);
-    exports.add_view("view_my_boolean", view_my_boolean)
+    exports.add_view("view_my_boolean", view_my_boolean);
 }
 
 // Anyone can call this SC function
