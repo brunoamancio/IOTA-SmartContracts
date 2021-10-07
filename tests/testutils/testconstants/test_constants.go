@@ -1,5 +1,9 @@
 package testconstants
 
+import (
+	"github.com/brunoamancio/NotSolo/constants"
+)
+
 const (
 	// ContractName is defined in smartcontract/rust/Cargo.toml > package > name
 	ContractName = "my_iota_sc"
@@ -13,16 +17,12 @@ const (
 	   requests to be processed. Basically, it works as a flag. After the request is processed, the token is uncolored
 	   and sent to the chain owner's account in the chain.
 	*/
-	IotaTokensConsumedByRequest = 1
+	IotaTokensConsumedByRequest = constants.IotaTokensConsumedByRequest
 
-	/* INTERESTING FACT: Creating a chain requires 2 iota tokens. They are colored with the chain's color,
-	   1 is sent to the chain's address in the value tangle, and the other is used exactly as iotaTokensConsumedByRequest.
-	*/
-	IotaTokensConsumedByChain = 1
-
-	// Used to fund address in NewSignatureSchemeWithFunds. // Defined in iotaledger/wasp/packages/testutiltestutil.RequestFundsAmount.
-	InitialWalletFunds = 1337
+	// Used to fund address in NewKeyPairWithFunds. // Defined in iotaledger/wasp/packages/testutiltestutil.RequestFundsAmount.
+	InitialWalletFunds = uint64(1_000_000)
 
 	// AccountsContractName sets the name of the Accounts contract, which is a root contract present in every chain
 	AccountsContractName = "accounts"
+	BlobContractName     = "blob"
 )

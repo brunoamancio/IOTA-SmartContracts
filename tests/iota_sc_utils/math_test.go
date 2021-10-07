@@ -13,7 +13,7 @@ func Test_math_functions(t *testing.T) {
 	notSolo := notsolo.New(t)
 	chain := notSolo.Chain.NewChain(nil, "mathChain")
 
-	// Deploy contract with chainOwnerSigScheme
+	// Deploy contract with chainOwnerKeyPair
 	contractFilePath := testutils.MustGetContractWasmFilePath(t, testconstants.ContractName)
 	notSolo.Chain.DeployWasmContract(chain, nil, testconstants.ContractName, contractFilePath)
 

@@ -17,6 +17,6 @@
     //"-buildmode=exe" // Uncomment this on windows. Is is needed due to an issue caused by gcc when compiling the unit tests
   ],
   "rust-analyzer.updates.askBeforeDownload": false,
-  "rust-analyzer.linkedProjects": ["smartcontract/rust/Cargo.toml"]
-  //"editor.formatOnSave": true
+  "rust-analyzer.linkedProjects": ["smartcontract/rust/Cargo.toml"],
+  "editor.formatOnSave": true
 }

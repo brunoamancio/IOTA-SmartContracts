@@ -6,7 +6,7 @@ import (
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils"
 	"github.com/brunoamancio/IOTA-SmartContracts/tests/testutils/testconstants"
 	notsolo "github.com/brunoamancio/NotSolo"
-	"github.com/iotaledger/goshimmer/dapps/valuetransfers/packages/balance"
+	"github.com/iotaledger/wasp/packages/iscp/colored"
 	"github.com/stretchr/testify/require"
 )
 
@@ -17,23 +17,23 @@ func Test_SendTokensToChain_NoContractFees(t *testing.T) {
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
 	// Generates key pairs for sender and receiver wallets and provides both with dummy funds.
-	senderWalletSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	senderWalletKeyPair := notSolo.KeyPair.NewKeyPairWithFunds()
 
 	// Wallet balance in value tangle -> Before transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds)
 
 	// Generate a dummy chain NOT beloging to sender
 	chain := notSolo.Chain.NewChain(nil, "myChain")
 
 	// Wallet balance in chain -> Before transfer
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, 0)
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, 0)
 
 	// Transfer from sender's address in the value tangle to his account in 'chain'
-	notSolo.ValueTangle.MustTransferToChainToSelf(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas)
+	notSolo.L1.MustTransferToChainToSelf(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas)
 
 	// Wallet balances -> After transfer to chain
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest)
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas+iotaTokensConsumedByRequest)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds-transferValueIotas)
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas)
 }
 
 func Test_SendAndReceiveTokens_NoContractFees(t *testing.T) {
@@ -42,27 +42,27 @@ func Test_SendAndReceiveTokens_NoContractFees(t *testing.T) {
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
 	// Generates key pairs for sender and receiver wallets and provides both with dummy funds.
-	senderWalletSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	senderWalletKeyPair := notSolo.KeyPair.NewKeyPairWithFunds()
 
 	// Wallet balance in value tangle -> Before transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds)
 
 	// Generates key pairs for sender wallet.
-	receiverWalletSigScheme := notSolo.SigScheme.NewSignatureScheme()
-	notSolo.ValueTangle.RequireBalance(receiverWalletSigScheme, balance.ColorIOTA, 0)
+	receiverWalletKeyPair := notSolo.KeyPair.NewKeyPair()
+	notSolo.L1.RequireBalance(receiverWalletKeyPair, colored.IOTA, 0)
 
 	// Generate a dummy chain NEITHER belonging to sender NOR receiver
 	chain := notSolo.Chain.NewChain(nil, "myChain")
 
 	// Transfer from sender's address in the value tangle to the receiver's account in 'chain'
-	notSolo.ValueTangle.MustTransferToChain(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas, receiverWalletSigScheme)
+	notSolo.L1.MustTransferToChain(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas, receiverWalletKeyPair)
 
 	// Wallet balances -> After transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest)
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, iotaTokensConsumedByRequest)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds-transferValueIotas)
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, 0)
 
-	notSolo.ValueTangle.RequireBalance(receiverWalletSigScheme, balance.ColorIOTA, 0)
-	notSolo.Chain.RequireBalance(receiverWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas)
+	notSolo.L1.RequireBalance(receiverWalletKeyPair, colored.IOTA, 0)
+	notSolo.Chain.RequireBalance(receiverWalletKeyPair, chain, colored.IOTA, transferValueIotas)
 }
 
 func Test_SendTokensToChain_WithContractFees(t *testing.T) {
@@ -71,10 +71,10 @@ func Test_SendTokensToChain_WithContractFees(t *testing.T) {
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
 	// Generates key pairs for sender and receiver wallets and provides both with dummy funds.
-	senderWalletSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	senderWalletKeyPair := notSolo.KeyPair.NewKeyPairWithFunds()
 
 	// Wallet balance in value tangle -> Before transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds)
 
 	// Generate a dummy chain NOT beloging to sender
 	chain := notSolo.Chain.NewChain(nil, "myChain")
@@ -82,29 +82,29 @@ func Test_SendTokensToChain_WithContractFees(t *testing.T) {
 
 	// Check contract fees before changing them
 	feeColor, ownerFee, validatorFee := chain.GetFeeInfo(contractName)
-	require.Equal(t, balance.ColorIOTA, feeColor)
-	require.Equal(t, int64(0), ownerFee)
-	require.Equal(t, int64(0), validatorFee)
+	require.Equal(t, colored.IOTA, feeColor)
+	require.Equal(t, uint64(0), ownerFee)
+	require.Equal(t, uint64(0), validatorFee)
 
 	// Request to change the contract fee settings in 'chain'
-	const newContractOwnerFee = int64(100)
-	notSolo.Chain.ChangeContractFees(chain.OriginatorSigScheme, chain, contractName, newContractOwnerFee)
+	const newContractOwnerFee = uint64(2)
+	notSolo.Chain.ChangeContractFees(chain.OriginatorKeyPair, chain, contractName, newContractOwnerFee)
 
 	// Check contract fees after changing them
 	feeColor, ownerFee, validatorFee = chain.GetFeeInfo(contractName)
-	require.Equal(t, balance.ColorIOTA, feeColor)
+	require.Equal(t, colored.IOTA, feeColor)
 	require.Equal(t, newContractOwnerFee, ownerFee)
-	require.Equal(t, int64(0), validatorFee)
+	require.Equal(t, uint64(0), validatorFee)
 
 	// Wallet balance in chain -> Before transfer
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, 0)
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, 0)
 
 	// Transfer from sender's address in the value tangle to his account in 'chain'
-	notSolo.ValueTangle.MustTransferToChainToSelf(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas)
+	notSolo.L1.MustTransferToChainToSelf(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas)
 
 	// Balances -> After transfer to chain
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest)   // Transfered tokens are debited from the value tangle
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas+iotaTokensConsumedByRequest-newContractOwnerFee) // His tokens in the chain minus fees
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds-transferValueIotas)            // Transfered tokens are debited from the value tangle
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas-newContractOwnerFee) // His tokens in the chain minus fees
 }
 
 func Test_SendTokensToContract_NoContractFees(t *testing.T) {
@@ -118,19 +118,19 @@ func Test_SendTokensToContract_NoContractFees(t *testing.T) {
 	notSolo.Chain.DeployWasmContract(chain, nil, testconstants.ContractName, contractWasmFilePath)
 
 	// Generates key pairs for sender wallets, which will send iota tokens to the contract
-	senderWalletSigScheme := notSolo.SigScheme.NewSignatureSchemeWithFunds()
+	senderWalletKeyPair := notSolo.KeyPair.NewKeyPairWithFunds()
 
 	// Balance in value tangle -> Before transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds)
 	require.GreaterOrEqual(t, initialWalletFunds, transferValueIotas)
 
 	// Transfer from sender's address in the value tangle to the contract's account in 'chain'
-	notSolo.ValueTangle.MustTransferToContract(senderWalletSigScheme, chain, balance.ColorIOTA, transferValueIotas, testconstants.ContractName)
+	notSolo.L1.MustTransferToContract(senderWalletKeyPair, chain, colored.IOTA, transferValueIotas, testconstants.ContractName)
 
 	// Balances -> After transfer
-	notSolo.ValueTangle.RequireBalance(senderWalletSigScheme, balance.ColorIOTA, initialWalletFunds-transferValueIotas-iotaTokensConsumedByRequest)
-	notSolo.Chain.RequireBalance(senderWalletSigScheme, chain, balance.ColorIOTA, iotaTokensConsumedByRequest)
+	notSolo.L1.RequireBalance(senderWalletKeyPair, colored.IOTA, initialWalletFunds-transferValueIotas)
+	notSolo.Chain.RequireBalance(senderWalletKeyPair, chain, colored.IOTA, 0)
 
 	// Contract's account balance in the chain -> After transfer
-	notSolo.Chain.RequireContractBalance(chain, testconstants.ContractName, balance.ColorIOTA, transferValueIotas)
+	notSolo.Chain.RequireContractBalance(chain, testconstants.ContractName, colored.IOTA, transferValueIotas)
 }

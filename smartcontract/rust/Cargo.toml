@@ -18,7 +18,7 @@ default = ["console_error_panic_hook"]
 console_error_panic_hook = { version = "0.1.6", optional = true }
 wee_alloc = { version = "0.4.5", optional = true }
 
-iota_sc_utils = { git = "https://github.com/brunoamancio/IOTA-SC-Utils", tag = "v0.8.91"}
+iota_sc_utils = { git = "https://github.com/brunoamancio/IOTA-SC-Utils", tag = "v0.8.94"}
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.13"
